@@ -1,3 +1,3 @@
 # JuniorDesign
 Community on Demand
-Names Sneha, Pratik, Stephanie, Kathy
+Names Sneha, Pratik, Stephanie, Kathy, Jourdan
