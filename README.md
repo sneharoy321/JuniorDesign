@@ -1,5 +1,5 @@
-# JuniorDesign
-Community on Demand
+# Team 2121: Community on Demand Application
+
 Names: Sneha Roy, Pratik Deolasi, Stephanie Henderson, Kathy Hu, Jourdan Holmes, William Kang
 
 # Basic Artifact
