@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -26,7 +27,8 @@ public class Controller extends Application {
     private Button advanceToDashBoard;
     private Button playSkillGame;
     private Button instructions;
-
+    private int currCardIndex = 0;
+    private Button skillsResults;
 
 
     public void start(Stage primaryStage) {
@@ -189,17 +191,152 @@ public class Controller extends Application {
             welcomeText.setAlignment(Pos.CENTER);
 
 
-            playSkillGame = new Button("Play Skill Assesment");
+            VBox buttons = new VBox(15.0);
+            playSkillGame = new Button("Card Skills Assessment");
             playSkillGame.setFont(new Font("Poppins", 17));
             playSkillGame.setStyle("-fx-background-color: #C1D1A6; -fx-border-color: black;");
             playSkillGame.setMaxWidth(200.0);
             playSkillGame.setPrefHeight(50.0);
-            welcomePane.setCenter(playSkillGame);
+
+            instructions = new Button("How to Play");
+            instructions.setFont(new Font("Poppins", 17));
+            instructions.setStyle("-fx-background-color: #C1D1A6; -fx-border-color: black;");
+            instructions.setMaxWidth(200.0);
+            instructions.setPrefHeight(50.0);
+
+            welcomePane.setAlignment(instructions, Pos.CENTER);
             welcomePane.setAlignment(playSkillGame, Pos.CENTER);
+
+
+            buttons.getChildren().addAll(instructions, playSkillGame);
+            welcomePane.setCenter(buttons);
+            buttons.setAlignment(Pos.CENTER);
             welcomePane.setMargin(playSkillGame, new Insets(30.0, 0.0, 50.0, 0.0));
             background.getChildren().add(welcomePane);
-
+            cardGame();
+            instructionRead();
         });
     }
 
+
+
+    public void instructionRead() {
+        instructions.setOnAction(e -> {
+            background.getChildren().remove(welcomePane);
+            welcomePane = new BorderPane(); // reset
+            Text textInstructions = new Text();
+            textInstructions.setText("During the skills assessment,\nyou will swipe through cards\n"
+                    + "that fall within five\nachievement domains:\n" +
+                            "\n" +
+                            "1. Career Awareness\n" +
+                            "2. Innovation\n" +
+                            "3. Workforce Ready\n" +
+                            "4. STEAM Careers\n" +
+                            "5. Leadership\n \n" +
+                    "If you have the skill\n" +
+                    "and currently use it,\n" +
+                    "press the green button.\n\n" +
+                    "If you have the skill,\n" +
+                    "but do not use it, press\n" +
+                    "the yellow button.\n\n" +
+                            "If you do not have the skill,\n" +
+                            "press the red button");
+            textInstructions.setFont(new Font("Poppins", 12));
+            textInstructions.setFill(Color.WHITE);
+            welcomePane.setCenter(textInstructions);
+            welcomePane.setBottom(playSkillGame);
+            playSkillGame.setPrefHeight(50.0);
+            playSkillGame.setPrefWidth(70.0);
+            playSkillGame.setText("Play Game!");
+
+            Text text = new Text("How to Play:");
+            text.setUnderline(true);
+            text.setFont(new Font("Poppins", 36));
+            text.setStroke(Color.BLACK);
+            text.setFill(Color.WHITE);
+            welcomePane.setAlignment(text, Pos.CENTER);
+            welcomePane.setTop(text);
+            welcomePane.setMargin(text, new Insets(25.0, 0.0, 20, 0.0));
+            welcomePane.setAlignment(playSkillGame, Pos.CENTER);
+            cardGame();
+            background.getChildren().add(welcomePane);
+        });
+    }
+
+
+    public void cardGame() {
+        playSkillGame.setOnAction(e -> {
+            background.getChildren().remove(welcomePane);
+            welcomePane = new BorderPane(); // reset
+
+            StackPane good = new StackPane();
+            Circle have = new Circle(30, Color.GREEN);
+            Text x = new Text("x");
+            x.setFill(Color.BLACK);
+            good.getChildren().addAll(have, x);
+
+            Text x1 = new Text("x");
+            StackPane bad = new StackPane();
+            Circle haveNot = new Circle(30, Color.RED);
+            bad.getChildren().addAll(haveNot, x1);
+
+            Text x2 = new Text("x");
+            StackPane yellow = new StackPane();
+            Circle noUse = new Circle(30, Color.YELLOW);
+            yellow.getChildren().addAll(noUse, x2);
+
+            x.setFont(new Font("Poppins", 20));
+            x1.setFont(new Font("Poppins", 20));
+            x2.setFont(new Font("Poppins", 20));
+
+            yellow.setOnMouseClicked(l -> switchCard());
+            bad.setOnMouseClicked(k -> switchCard());
+            good.setOnMouseClicked(f -> switchCard());
+
+            HBox buttonOptions = new HBox(50.0);
+            buttonOptions.getChildren().addAll(bad, yellow, good);
+            welcomePane.setBottom(buttonOptions);
+            buttonOptions.setAlignment(Pos.CENTER);
+
+            if (currCardIndex < STEAMCards.steam.size()) {
+                ImageView card = STEAMCards.steam.get(currCardIndex);
+                currCardIndex++;
+                welcomePane.setCenter(card);
+                welcomePane.setAlignment(card, Pos.CENTER);
+                card.setPreserveRatio(true);
+                card.setFitHeight(330);
+                card.setFitWidth(250);
+            }
+            background.getChildren().add(welcomePane);
+            welcomePane.setMargin(buttonOptions, new Insets(0.0, 0.0, 20, 0.0));
+        });
+
+    }
+
+    public void switchCard() {
+        if (currCardIndex < STEAMCards.steam.size()) {
+            ImageView card = STEAMCards.steam.get(currCardIndex);
+            currCardIndex++;
+            welcomePane.setCenter(card);
+            welcomePane.setAlignment(card, Pos.CENTER);
+            card.setPreserveRatio(true);
+            card.setFitHeight(330);
+            card.setFitWidth(250);
+        } else {
+            Text noMore = new Text("No more\ncards left!");
+            noMore.setFont(new Font("Poppins", 36));
+            welcomePane.setCenter(noMore);
+            welcomePane.setAlignment(noMore, Pos.CENTER);
+            noMore.setFill(Color.WHITE);
+            noMore.setStroke(Color.BLACK);
+            skillsResults = new Button("See Skill Report");
+            skillsResults.setStyle("-fx-background-color: #C1D1A6; -fx-border-color: black;");
+            skillsResults.setFont(new Font("Poppins", 17));
+            skillsResults.setPrefWidth(200);
+            skillsResults.setPrefHeight(100);
+            welcomePane.setBottom(skillsResults);
+            welcomePane.setMargin(skillsResults, new Insets(0.0, 0.0, 20, 0.0));
+            welcomePane.setAlignment(skillsResults, Pos.CENTER);
+        }
+    }
 }
