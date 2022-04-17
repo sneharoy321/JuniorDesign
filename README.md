@@ -1,3 +1,15 @@
 # JuniorDesign
 Community on Demand
-Names Sneha, Pratik, Stephanie, Kathy, Jourdan, William
+Names: Sneha Roy, Pratik Deolasi, Stephanie Henderson, Kathy Hu, Jourdan Holmes, William Kang
+
+# Basic Artifact
+Our artifact was constructed using JavaFX. JavaFX is a great tool for implementing Graphical User Interfaces and organizing the structure of applications. We used JavaFX to construct a demo of our mobile application in order to understand our current technical abilities and to attempt transforming parts of our figma prototype into acual Java code.
+
+# How to Run
+To run our artifact, please install the version 11 JavaFX sdk: https://gluonhq.com/products/javafx/ as well as Java 11:https://www.oracle.com/java/technologies/downloads/.
+
+To compile our program, you can use this command in the terminal: javac --module-path javafx-sdk-11.0.2/lib --add-modules=javafx.controls Controller.java
+To run, you can use this command: java --module-path javafx-sdk-11.0.2/lib --add-modules=javafx.controls Controller
+
+Replace javafx-sdk-11.0.2/lib with the path to your javafx-sdk-11.0.2 lib folder.
+
