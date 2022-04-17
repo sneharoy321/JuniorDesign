@@ -228,7 +228,7 @@ public class Controller extends Application {
             background.getChildren().remove(welcomePane);
             welcomePane = new BorderPane(); // reset
             Text textInstructions = new Text();
-            textInstructions.setText("During the skills assessment,you will \nswipe through cards"
+            textInstructions.setText("During the skills assessment, you will \nswipe through cards"
                     + " that fall within \nfive achievement domains:\n" +
                             "1. Career Awareness\n" +
                             "2. Innovation\n" +
