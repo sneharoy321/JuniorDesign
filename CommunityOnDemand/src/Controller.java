@@ -29,6 +29,9 @@ public class Controller extends Application {
     private Button instructions;
     private int currCardIndex = 0;
     private Button skillsResults;
+    private int numUsed = 0;
+    private int numNotUsed = 0;
+    private int numNotHave = 0;
 
 
     public void start(Stage primaryStage) {
@@ -37,7 +40,7 @@ public class Controller extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
         primaryStage.setResizable(false);
-
+        primaryStage.setTitle("Community on Demand");
     }
 
     public void constructWelcome() {
@@ -225,24 +228,24 @@ public class Controller extends Application {
             background.getChildren().remove(welcomePane);
             welcomePane = new BorderPane(); // reset
             Text textInstructions = new Text();
-            textInstructions.setText("During the skills assessment,\nyou will swipe through cards\n"
-                    + "that fall within five\nachievement domains:\n" +
-                            "\n" +
+            textInstructions.setText("During the skills assessment,you will \nswipe through cards"
+                    + " that fall within \nfive achievement domains:\n" +
                             "1. Career Awareness\n" +
                             "2. Innovation\n" +
                             "3. Workforce Ready\n" +
                             "4. STEAM Careers\n" +
                             "5. Leadership\n \n" +
-                    "If you have the skill\n" +
-                    "and currently use it,\n" +
+                    "If you have the skill" +
+                    " and currently use it,\n" +
                     "press the green button.\n\n" +
-                    "If you have the skill,\n" +
-                    "but do not use it, press\n" +
-                    "the yellow button.\n\n" +
+                    "If you have the skill," +
+                    " but do not use it,\n press" +
+                    " the yellow button.\n\n" +
                             "If you do not have the skill,\n" +
                             "press the red button");
-            textInstructions.setFont(new Font("Poppins", 12));
-            textInstructions.setFill(Color.WHITE);
+            textInstructions.setFont(new Font("Poppins", 14));
+            textInstructions.setFill(Color.BLACK);
+            textInstructions.setStroke(Color.BLACK);
             welcomePane.setCenter(textInstructions);
             welcomePane.setBottom(playSkillGame);
             playSkillGame.setPrefHeight(50.0);
@@ -289,9 +292,24 @@ public class Controller extends Application {
             x1.setFont(new Font("Poppins", 20));
             x2.setFont(new Font("Poppins", 20));
 
-            yellow.setOnMouseClicked(l -> switchCard());
-            bad.setOnMouseClicked(k -> switchCard());
-            good.setOnMouseClicked(f -> switchCard());
+            yellow.setOnMouseClicked(l -> {
+                if (currCardIndex < STEAMCards.steam.size()) {
+                    numNotUsed++;
+                }
+                switchCard();
+            });
+            bad.setOnMouseClicked(k -> {
+                if (currCardIndex < STEAMCards.steam.size()) {
+                    numNotHave++;
+                }
+                switchCard();
+            });
+            good.setOnMouseClicked(f -> {
+                if (currCardIndex < STEAMCards.steam.size()) {
+                    numUsed++;
+                }
+                switchCard();
+            });
 
             HBox buttonOptions = new HBox(50.0);
             buttonOptions.getChildren().addAll(bad, yellow, good);
@@ -309,6 +327,7 @@ public class Controller extends Application {
             }
             background.getChildren().add(welcomePane);
             welcomePane.setMargin(buttonOptions, new Insets(0.0, 0.0, 20, 0.0));
+
         });
 
     }
@@ -337,6 +356,47 @@ public class Controller extends Application {
             welcomePane.setBottom(skillsResults);
             welcomePane.setMargin(skillsResults, new Insets(0.0, 0.0, 20, 0.0));
             welcomePane.setAlignment(skillsResults, Pos.CENTER);
+            genSkillsReport();
         }
+    }
+
+    public void genSkillsReport() {
+        skillsResults.setOnAction(e -> {
+            background.getChildren().remove(welcomePane);
+            welcomePane = new BorderPane(); // reset
+
+            Text skill = new Text("Skills Report: ");
+            int totalCards = numNotHave + numUsed + numNotUsed;
+            Text report = new Text("You currently have " + numUsed +
+                    "\nSTEAM Career skills.\n\n" +
+                    "You currently have but\n" +
+                    "do not use " + numNotUsed + " STEAM\n" +
+                    "Career skills\n\n" +
+                    "You currently do not have\n" +
+                    numNotHave + " STEAM Career Skills.\n\n");
+            Text competency = new Text("Overall STEAM \nCareer " +
+                    "Competency: " + (numUsed / totalCards));
+            skill.setFill(Color.WHITE);
+            skill.setUnderline(true);
+            skill.setStroke(Color.BLACK);
+            skill.setFont(new Font("Poppins", 36));
+
+            report.setFill(Color.WHITE);
+            report.setFont(new Font("Poppins", 15));
+
+            competency.setFill(Color.BLACK);
+            competency.setStroke(Color.BLACK);
+            competency.setFont(new Font("Poppins", 25));
+
+            welcomePane.setTop(skill);
+            welcomePane.setCenter(report);
+            welcomePane.setBottom(competency);
+            welcomePane.setAlignment(skill, Pos.CENTER);
+            welcomePane.setAlignment(competency, Pos.CENTER);
+            welcomePane.setAlignment(report, Pos.CENTER);
+            welcomePane.setMargin(competency, new Insets(0.0, 0.0, 20, 0.0));
+            welcomePane.setMargin(skill, new Insets(50.0, 0.0, 30.0, 0.0));
+            background.getChildren().add(welcomePane);
+        });
     }
 }
