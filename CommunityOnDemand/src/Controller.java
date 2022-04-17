@@ -24,6 +24,8 @@ public class Controller extends Application {
     private TextField password = new TextField();
     private String nameOfUser;
     private Button advanceToDashBoard;
+    private Button playSkillGame;
+    private Button instructions;
 
 
 
@@ -107,6 +109,7 @@ public class Controller extends Application {
             welcomePane.setMargin(advanceToDashBoard, new Insets(30.0, 0.0, 50.0, 0.0));
 
             background.getChildren().add(welcomePane);
+            constructDashBoard();
         });
     }
 
@@ -155,4 +158,48 @@ public class Controller extends Application {
         passwords.setAlignment(Pos.CENTER);
         return passwords;
     }
+
+    public void constructDashBoard() {
+        advanceToDashBoard.setOnAction(e -> {
+            background.getChildren().remove(welcomePane);
+            welcomePane = new BorderPane(); // reset
+
+
+            VBox welcomeText = new VBox();
+
+            Text welcomeName = new Text();
+            welcomeName.setText("Welcome");
+            welcomeName.setFont(new Font("Poppins", 36));
+            welcomeName.setStroke(Color.BLACK);
+            welcomeName.setFill(Color.WHITE);
+
+
+            Text welcomeNames = new Text();
+            welcomeNames.setText(name.getText() + "!");
+            welcomeNames.setFont(new Font("Poppins", 36));
+            welcomeNames.setStroke(Color.BLACK);
+            welcomeNames.setFill(Color.WHITE);
+
+            welcomeText.getChildren().addAll(welcomeName, welcomeNames);
+
+            welcomePane.setTop(welcomeText);
+            welcomePane.setMargin(welcomeText, new Insets(50.0, 0.0, 30.0, 0.0));
+            welcomePane.setAlignment(welcomeName, Pos.CENTER);
+            welcomePane.setAlignment(welcomeNames, Pos.CENTER);
+            welcomeText.setAlignment(Pos.CENTER);
+
+
+            playSkillGame = new Button("Play Skill Assesment");
+            playSkillGame.setFont(new Font("Poppins", 17));
+            playSkillGame.setStyle("-fx-background-color: #C1D1A6; -fx-border-color: black;");
+            playSkillGame.setMaxWidth(200.0);
+            playSkillGame.setPrefHeight(50.0);
+            welcomePane.setCenter(playSkillGame);
+            welcomePane.setAlignment(playSkillGame, Pos.CENTER);
+            welcomePane.setMargin(playSkillGame, new Insets(30.0, 0.0, 50.0, 0.0));
+            background.getChildren().add(welcomePane);
+
+        });
+    }
+
 }
