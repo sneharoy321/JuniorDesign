@@ -8,8 +8,8 @@ Our artifact was constructed using JavaFX. JavaFX is a great tool for implementi
 # How to Run
 To run our artifact, please install the version 11 JavaFX sdk: https://gluonhq.com/products/javafx/ as well as Java 11:https://www.oracle.com/java/technologies/downloads/.
 
-To compile our program, you can use this command in the terminal: javac --module-path javafx-sdk-11.0.2/lib --add-modules=javafx.controls Controller.java
-To run, you can use this command: java --module-path javafx-sdk-11.0.2/lib --add-modules=javafx.controls Controller
+To compile our program, you can use this command in the terminal: javac --module-path javafx-sdk-11.0.2/lib --add-modules=javafx.controls Controller.java.
+To run, you can use this command: java --module-path javafx-sdk-11.0.2/lib --add-modules=javafx.controls Controller.
 
 Replace javafx-sdk-11.0.2/lib with the path to your javafx-sdk-11.0.2 lib folder.
 
