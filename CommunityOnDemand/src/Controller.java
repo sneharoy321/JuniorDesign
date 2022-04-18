@@ -31,6 +31,7 @@ public class Controller extends Application {
     private int numUsed = 0;
     private int numNotUsed = 0;
     private int numNotHave = 0;
+    private ImageView backImg;
 
 
     public void start(Stage primaryStage) {
@@ -43,7 +44,8 @@ public class Controller extends Application {
     }
 
     public void constructWelcome() {
-        background.getChildren().add(backgroundImg());
+        backImg = backgroundImg();
+        background.getChildren().add(backImg);
         VBox loginButtons = loginOrSignUp();
         loginButtons.setAlignment(Pos.CENTER);
         Text welcome = welcomeLabel();
@@ -91,7 +93,6 @@ public class Controller extends Application {
         signin.setOnAction(e -> {
             background.getChildren().remove(welcomePane);
             welcomePane = new BorderPane(); // reset
-
             Text signUp = new Text("Sign Up");  // sign up text and placement
             signUp.setStroke(Color.BLACK);
             signUp.setFont(new Font("Poppins", 40));
@@ -224,6 +225,7 @@ public class Controller extends Application {
 
     public void instructionRead() {
         instructions.setOnAction(e -> {
+            background.getChildren().remove(backImg);
             background.getChildren().remove(welcomePane);
             welcomePane = new BorderPane(); // reset
             Text textInstructions = new Text();
@@ -268,6 +270,7 @@ public class Controller extends Application {
 
     public void cardGame() {
         playSkillGame.setOnAction(e -> {
+            background.getChildren().add(backImg);
             background.getChildren().remove(welcomePane);
             welcomePane = new BorderPane(); // reset
 
@@ -361,6 +364,8 @@ public class Controller extends Application {
 
     public void genSkillsReport() {
         skillsResults.setOnAction(e -> {
+            background.getChildren().remove(backImg);
+            background.setStyle("-fx-background-color: #C1D1A6");
             background.getChildren().remove(welcomePane);
             welcomePane = new BorderPane(); // reset
 
@@ -375,12 +380,12 @@ public class Controller extends Application {
                     numNotHave + " STEAM Career Skills.\n\n");
             Text competency = new Text("Overall STEAM \nCareer " +
                     "Competency: " + numUsed + "/" + totalCards);
-            skill.setFill(Color.WHITE);
+            skill.setFill(Color.BLACK);
             skill.setUnderline(true);
             skill.setStroke(Color.BLACK);
             skill.setFont(new Font("Poppins", 36));
 
-            report.setFill(Color.WHITE);
+            report.setFill(Color.BLACK);
             report.setFont(new Font("Poppins", 15));
 
             competency.setFill(Color.BLACK);
