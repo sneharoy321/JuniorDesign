@@ -241,7 +241,7 @@ public class Controller extends Application {
                     " but do not use it,\n press" +
                     " the yellow button.\n\n" +
                             "If you do not have the skill,\n" +
-                            "press the red button");
+                            "press the red button.");
             textInstructions.setFont(new Font("Poppins", 14));
             textInstructions.setFill(Color.BLACK);
             textInstructions.setStroke(Color.BLACK);
@@ -368,7 +368,7 @@ public class Controller extends Application {
             int totalCards = numNotHave + numUsed + numNotUsed;
             Text report = new Text("You currently have " + numUsed +
                     "\nSTEAM Career skills.\n\n" +
-                    "You currently have but\n" +
+                    "You currently have, but\n" +
                     "do not use " + numNotUsed + " STEAM\n" +
                     "Career skills\n\n" +
                     "You currently do not have\n" +
