@@ -153,7 +153,7 @@ public class Controller extends Application {
 
     private VBox passwordTextField() {
         VBox passwords = new VBox(10.0);
-        Text passwordHere = new Text("Your password");
+        Text passwordHere = new Text("Your Password");
         passwordHere.setFont(new Font("Poppins", 17));
         passwordHere.setFill(Color.WHITE);
         password.setMaxWidth(200.0);
