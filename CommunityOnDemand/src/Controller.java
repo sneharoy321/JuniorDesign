@@ -64,8 +64,8 @@ public class Controller extends Application {
 
     public VBox loginOrSignUp() {
         VBox accountButtons = new VBox(20.0);
-        login = new Button("Log in");
-        signin = new Button("Sign up");
+        login = new Button("Log In");
+        signin = new Button("Sign Up");
         login.setFont(new Font("Poppins", 17));
         signin.setFont(new Font("Poppins", 17));
         login.setStyle("-fx-background-color: #C1D1A6; -fx-border-color: black;");
