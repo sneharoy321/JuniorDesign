@@ -4,6 +4,7 @@ import javafx.scene.image.ImageView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+// cards used for swiping
 public class STEAMCards {
     public static ArrayList<ImageView> steam = new ArrayList<ImageView>(Arrays.asList(
             new ImageView(new Image("./CropSTEAM/agriculture.png")),
