@@ -2,6 +2,9 @@
 
 Names: Sneha Roy, Pratik Deolasi, Stephanie Henderson, Kathy Hu, Jourdan Holmes, William Kang
 
+# About the Game
+Community on Demand is a card game designed to help people understand their skillsets and the skills they need to get in order to develop their careers. Our project is to implement an app version of this game with additional features such as resume building assistance and a skills report.
+
 # Basic Artifact
 Our artifact was constructed using JavaFX. JavaFX is a great tool for implementing Graphical User Interfaces and organizing the structure of applications. We used JavaFX to construct a demo of our mobile application in order to understand our current technical abilities and to attempt transforming parts of our figma prototype into acual Java code.
 

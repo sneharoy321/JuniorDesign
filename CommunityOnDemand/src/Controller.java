@@ -129,6 +129,7 @@ public class Controller extends Application {
             signin.setTextFill(Color.WHITE);
         });
 
+
         login.setPrefWidth(100.0);
         login.setPrefHeight(50.0);
         signin.setPrefWidth(100.0);
@@ -280,6 +281,7 @@ public class Controller extends Application {
         Text passwordHere = new Text("PASSWORD");
         passwordHere.setStyle("-fx-font-weight: bold;");
         passwordHere.setFont(new Font("Poppins", 12));
+
         passwordHere.setFill(Color.WHITE);
         password.setMaxWidth(200.0);
         //password.setStyle("-fx-border-color: black;");
@@ -391,8 +393,9 @@ public class Controller extends Application {
             background.getChildren().remove(welcomePane);
             welcomePane = new BorderPane(); // reset
             Text textInstructions = new Text();
+
             textInstructions.setText("During the skills assessment, you will \nswipe through cards"
-                    + " that fall within \nfive achievement domains:\n\n" +
+                    + " that fall within \5 achievement domains:\n" +
                             "1. Career Awareness\n" +
                             "2. Innovation\n" +
                             "3. Workforce Ready\n" +
